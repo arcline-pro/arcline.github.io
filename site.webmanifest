@@ -1,0 +1,14 @@
+{
+  "name": "Arcline",
+  "short_name": "Arcline",
+  "description": "Your AI employee that never sleeps. Autonomous business automation — email, social, CRM, support, invoicing — 24/7.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0b10",
+  "theme_color": "#22d3ee",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
