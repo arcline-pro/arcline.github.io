@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arcline &mdash; Your AI Employee That Never Sleeps</title>
+<meta name="description" content="Arcline is an autonomous AI agent that runs your entire business &mdash; email, social, CRM, support, invoicing &mdash; 24/7 with human oversight.">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+:root{--canvas:#0a0b10;--surface:rgba(14,14,18,0.65);--border:rgba(255,255,255,0.07);--border-top:rgba(255,255,255,0.14);--text:#e4e4e7;--muted:#8b8b92;--dim:#52525a}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--canvas);color:var(--text);line-height:1.6;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(34,211,238,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0}
+a{color:inherit;text-decoration:none}.wrap{max-width:1160px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border)}
+.ni{display:flex;align-items:center;justify-content:space-between;padding:0.875rem 1.5rem;max-width:1160px;margin:0 auto}
+.logo{font-family:'JetBrains Mono',monospace;font-size:1.125rem;font-weight:600}
+.nl{display:flex;align-items:center;gap:2rem}.nl a{font-size:0.875rem;color:var(--muted);transition:color .2s}.nl a:hover{color:var(--text)}
+.bp{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;padding:.875rem 2rem;border-radius:8px;font-size:.9375rem;transition:opacity .2s,transform .2s;border:none;cursor:pointer}.bp:hover{opacity:.85;transform:translateY(-1px)}
+.bo{display:inline-flex;align-items:center;background:var(--surface);border:1px solid rgba(255,255,255,.10);color:var(--text);font-weight:500;padding:.875rem 2rem;border-radius:8px;font-size:.9375rem;backdrop-filter:blur(12px);transition:border-color .2s,transform .2s}.bo:hover{border-color:rgba(255,255,255,.2);transform:translateY(-1px)}
+.gc{background:var(--surface);border:1px solid var(--border);border-top:1px solid var(--border-top);border-radius:12px;backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 4px 24px rgba(0,0,0,.3);transition:border-color .2s,transform .2s}
+section{position:relative;z-index:1}
+.lbl{font-family:'JetBrains Mono',monospace;font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.75rem}
+.h2{font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;letter-spacing:-.02em;margin-bottom:1rem}
+.badge{display:inline-flex;align-items:center;gap:.5rem;border-radius:100px;padding:.375rem 1rem;font-size:.75rem;font-family:'JetBrains Mono',monospace;letter-spacing:.05em;margin-bottom:2rem}
+.bd{width:6px;height:6px;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-.02em;margin-bottom:1.5rem;max-width:52rem;margin-left:auto;margin-right:auto}
+.grad-c{background:linear-gradient(135deg,#22d3ee 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-o{background:linear-gradient(135deg,#ff6b2b 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-p{background:linear-gradient(135deg,#a78bfa 0%,#22d3ee 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.acts{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:rgba(14,14,18,.50);backdrop-filter:blur(20px);padding:2rem 1.5rem;position:relative;z-index:1}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;max-width:800px;margin:0 auto;text-align:center}
+.sv{font-family:'JetBrains Mono',monospace;font-size:1.75rem;font-weight:600;margin-bottom:.25rem}
+.sl{font-size:.8125rem;color:var(--muted)}
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.fc{padding:1.75rem}
+.fi{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:1rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.step{text-align:center;padding:2rem 1.5rem}
+.sn{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:600;opacity:.4;margin-bottom:1rem;display:block}
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.ti{padding:1.25rem;text-align:center}
+.term{max-width:42rem;margin:0 auto;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.10);border-top:1px solid rgba(255,255,255,.14);border-radius:12px;overflow:hidden;text-align:left;backdrop-filter:blur(20px)}
+.tb{display:flex;align-items:center;gap:.5rem;padding:.625rem 1rem;border-bottom:1px solid var(--border);background:rgba(255,255,255,.03)}
+.td{width:10px;height:10px;border-radius:50%}.td.r{background:#ff5f57}.td.y{background:#febc2e}.td.g{background:#28c840}
+.tt{font-family:'JetBrains Mono',monospace;font-size:.6875rem;color:var(--dim);margin-left:auto}
+.tbody{padding:1.25rem;font-family:'JetBrains Mono',monospace;font-size:.8125rem;line-height:1.8}
+.tl{display:flex;gap:.75rem}
+.to{color:var(--muted);padding-left:1rem}.cur{display:inline-block;width:8px;height:14px;vertical-align:middle;animation:blink 1.2s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+footer{border-top:1px solid var(--border);padding:3rem 1.5rem;position:relative;z-index:1}
+.fi2{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.fl a{font-size:.875rem;color:var(--dim);transition:color .2s;margin-left:1.5rem}.fl a:hover{color:var(--muted)}
+.pf{list-style:none;margin-bottom:2rem}.pf li{display:flex;align-items:flex-start;gap:.625rem;font-size:.875rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border)}.pf li:last-child{border-bottom:none}
+.cta-box{border-radius:16px;padding:4rem 2rem;text-align:center}
+@media(max-width:900px){.fg,.tg{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}}
+@media(max-width:640px){.sg{grid-template-columns:repeat(2,1fr)}.fg{grid-template-columns:1fr}.nl{display:none}}
+
+:root{--accent:#22d3ee;--accent-dim:rgba(34,211,238,0.10);--accent-glow:rgba(34,211,238,0.20)}
+.glow-t{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:600px;background:radial-gradient(ellipse,rgba(34,211,238,0.08) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-b{position:fixed;bottom:-300px;right:-200px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(167,139,250,0.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+nav{background:rgba(10,11,16,0.80)}
+.logo .c{color:#22d3ee}
+.nav-cta{background:#22d3ee!important;color:#000!important;font-weight:600;padding:.5rem 1.25rem;border-radius:6px}
+.hero{padding:7rem 1.5rem 5rem;text-align:center}
+.badge{background:rgba(34,211,238,0.10);border:1px solid rgba(34,211,238,0.25);color:#22d3ee}
+.bd{background:#22d3ee}
+.sv{color:#22d3ee}
+.lbl{color:#22d3ee}
+.sn{color:#22d3ee}
+.bp{background:#22d3ee;color:#000}
+.fi.ic{background:rgba(34,211,238,0.10);border:1px solid rgba(34,211,238,0.20)}
+.fi.ip{background:rgba(167,139,250,0.10);border:1px solid rgba(167,139,250,0.20)}
+.fi.io{background:rgba(255,107,43,0.10);border:1px solid rgba(255,107,43,0.20)}
+.gc:hover{border-color:rgba(34,211,238,0.20)}
+.tl .tp{color:#22d3ee}.tl .tc{color:var(--text)}
+.ts{color:#22d3ee;padding-left:1rem}.tw{color:#ff6b2b;padding-left:1rem}
+.cur{background:#22d3ee}
+.cta-box{background:linear-gradient(135deg,rgba(34,211,238,0.08) 0%,rgba(167,139,250,0.08) 100%);border:1px solid rgba(34,211,238,0.20)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.pc{padding:2rem;position:relative}
+.pc.feat{border-color:rgba(34,211,238,.35);box-shadow:0 0 40px rgba(34,211,238,.10)}
+.fbadge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#22d3ee;color:#000;font-size:.6875rem;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:.08em;padding:.25rem .875rem;border-radius:100px;white-space:nowrap}
+.ck{color:#22d3ee;flex-shrink:0;margin-top:1px}
+@media(max-width:900px){.pg{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+</style>
+</head>
+<body>
+<div class="glow-t"></div><div class="glow-b"></div>
+<nav>
+  <div class="ni">
+    <a href="/" class="logo">Arc<span class="c">line</span></a>
+    <div class="nl">
+      <a href="/features/">Features</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="https://autopilotaitech.com" target="_blank">Company</a>
+      <a href="/about/">About</a>
+      <a href="/contact/" class="nav-cta">Get Early Access</a>
+    </div>
+  </div>
+</nav>
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="bd"></span>EARLY ACCESS &mdash; LIMITED SPOTS</div>
+    <h1>Your AI employee.<br><span class="grad-c">Always on duty.</span></h1>
+    <p style="font-size:1.125rem;color:var(--muted);max-width:38rem;margin:0 auto 2.5rem">Arcline runs your entire business autonomously &mdash; email, social, CRM, support, invoicing &mdash; 24/7 with human oversight when it matters.</p>
+    <div class="acts">
+      <a href="/contact/" class="bp">Get Early Access &rarr;</a>
+      <a href="/features/" class="bo">See How It Works</a>
+    </div>
+    <div class="term">
+      <div class="tb"><span class="td r"></span><span class="td y"></span><span class="td g"></span><span class="tt">arcline &mdash; heartbeat cycle</span></div>
+      <div class="tbody">
+        <div class="tl"><span class="tp">arcline:~$</span><span class="tc">&nbsp;run --cycle morning-briefing</span></div>
+        <div class="ts">&#10003; 14 new emails triaged &mdash; 3 flagged for review</div>
+        <div class="ts">&#10003; 2 leads qualified &rarr; moved to pipeline</div>
+        <div class="ts">&#10003; LinkedIn post scheduled (09:00 UTC)</div>
+        <div class="ts">&#10003; Invoice #1042 sent to client@example.com</div>
+        <div class="tw">&#9888; 1 support ticket requires human review</div>
+        <div class="tl" style="margin-top:.5rem"><span class="tp">arcline:~$</span><span class="tc">&nbsp;status</span></div>
+        <div class="to">uptime: 99.97% | tools active: 197 | next cycle: 15min</div>
+        <div class="tl"><span class="tp">arcline:~$</span><span class="cur"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="stats">
+  <div class="sg">
+    <div><div class="sv">197+</div><div class="sl">Integrated tools</div></div>
+    <div><div class="sv">24/7</div><div class="sl">Autonomous ops</div></div>
+    <div><div class="sv">&lt;2min</div><div class="sl">Lead response time</div></div>
+    <div><div class="sv">15min</div><div class="sl">Heartbeat cycle</div></div>
+  </div>
+</div>
+<section style="padding:6rem 0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="lbl">Capabilities</div>
+      <h2 class="h2">One AI. Every part of your business.</h2>
+      <p style="color:var(--muted);max-width:40rem;margin:0 auto">Stop paying for 6&ndash;8 disconnected tools. Arcline handles it all from a single autonomous agent.</p>
+    </div>
+    <div class="fg">
+      <div class="gc fc"><div class="fi ic">&#9993;</div><div style="font-weight:600;margin-bottom:.5rem">Email Intelligence</div><p style="font-size:.875rem;color:var(--muted)">Reads your inbox, drafts replies in your voice, sends follow-ups &mdash; Gmail &amp; Outlook with full RAG context.</p></div>
+      <div class="gc fc"><div class="fi ip">&#128241;</div><div style="font-weight:600;margin-bottom:.5rem">Social Autopilot</div><p style="font-size:.875rem;color:var(--muted)">Auto-generates posts, schedules across platforms, engages with comments &mdash; brand-consistent 24/7.</p></div>
+      <div class="gc fc"><div class="fi ic">&#128202;</div><div style="font-weight:600;margin-bottom:.5rem">CRM &amp; Lead Engine</div><p style="font-size:.875rem;color:var(--muted)">Captures leads, qualifies with AI scoring, manages pipeline stages, converts autonomously.</p></div>
+      <div class="gc fc"><div class="fi io">&#127915;</div><div style="font-weight:600;margin-bottom:.5rem">Support Automation</div><p style="font-size:.875rem;color:var(--muted)">Handles tickets, answers from your knowledge base, routes complex issues to humans.</p></div>
+      <div class="gc fc"><div class="fi ic">&#128179;</div><div style="font-weight:600;margin-bottom:.5rem">Invoicing &amp; Billing</div><p style="font-size:.875rem;color:var(--muted)">Creates invoices, sends reminders, tracks overdue, manages Stripe subscriptions.</p></div>
+      <div class="gc fc"><div class="fi ip">&#129504;</div><div style="font-weight:600;margin-bottom:.5rem">Neural Router</div><p style="font-size:.875rem;color:var(--muted)">Intelligent LLM routing across Claude 4, Gemini 2.0, and Ollama &mdash; cost vs capability optimised.</p></div>
+      <div class="gc fc"><div class="fi ic">&#128260;</div><div style="font-weight:600;margin-bottom:.5rem">Flow Builder</div><p style="font-size:.875rem;color:var(--muted)">Visual no-code automation builder. Chain triggers, agents, and actions across 197+ tools.</p></div>
+      <div class="gc fc"><div class="fi io">&#128272;</div><div style="font-weight:600;margin-bottom:.5rem">4-Tier Governance</div><p style="font-size:.875rem;color:var(--muted)">Auto-execute &rarr; Notify &rarr; Require approval &rarr; Block. Full audit log of every AI decision.</p></div>
+      <div class="gc fc"><div class="fi ip">&#128225;</div><div style="font-weight:600;margin-bottom:.5rem">WhatsApp via wacli</div><p style="font-size:.875rem;color:var(--muted)">Send/receive WhatsApp messages, sync contacts, run Arcline from your phone natively.</p></div>
+    </div>
+  </div>
+</section>
+<section style="padding:5rem 0;background:rgba(14,14,18,.40);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3rem">
+      <div class="lbl">Built On</div>
+      <h2 class="h2">Enterprise-grade AI infrastructure</h2>
+    </div>
+    <div class="tg">
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Claude 4 Sonnet/Opus</div><div style="font-size:.75rem;color:var(--muted)">Anthropic &mdash; primary reasoning</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Gemini 2.0 Flash</div><div style="font-size:.75rem;color:var(--muted)">Google &mdash; multimodal tasks</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Ollama Local LLMs</div><div style="font-size:.75rem;color:var(--muted)">Gemma 3, Qwen 3 &mdash; on-prem</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">pgvector + RAG</div><div style="font-size:.75rem;color:var(--muted)">PostgreSQL 17 vector memory</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Neural Router</div><div style="font-size:.75rem;color:var(--muted)">Cost-aware LLM dispatch</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Next.js 15 + TypeScript</div><div style="font-size:.75rem;color:var(--muted)">Full-stack React</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">Cloudflare Tunnels</div><div style="font-size:.75rem;color:var(--muted)">Zero-trust secure access</div></div>
+      <div class="gc ti"><div style="font-weight:500;margin-bottom:.25rem">197+ Integrations</div><div style="font-size:.75rem;color:var(--muted)">Gmail, Stripe, LinkedIn &amp; more</div></div>
+    </div>
+  </div>
+</section>
+<section style="padding:6rem 0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="lbl">Pricing</div>
+      <h2 class="h2">Simple, transparent pricing</h2>
+      <p style="color:var(--muted)">Early access pricing &mdash; locked in for life.</p>
+    </div>
+    <div class="pg">
+      <div class="gc pc">
+        <div style="font-size:.875rem;font-weight:500;color:var(--muted);margin-bottom:.5rem">Starter</div>
+        <div style="font-size:2.5rem;font-weight:700;margin-bottom:.25rem">$49<span style="font-size:1rem;font-weight:400;color:var(--muted)">/mo</span></div>
+        <div style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">For solopreneurs</div>
+        <ul class="pf"><li><span class="ck">&#10003;</span>5 automation flows</li><li><span class="ck">&#10003;</span>Email + social automation</li><li><span class="ck">&#10003;</span>CRM up to 500 contacts</li><li><span class="ck">&#10003;</span>Claude Haiku + Gemini Flash</li><li><span class="ck">&#10003;</span>Community support</li></ul>
+        <a href="/contact/" class="bo" style="width:100%;text-align:center;justify-content:center;display:flex">Get Early Access</a>
+      </div>
+      <div class="gc pc feat">
+        <div class="fbadge">MOST POPULAR</div>
+        <div style="font-size:.875rem;font-weight:500;color:var(--muted);margin-bottom:.5rem">Pro</div>
+        <div style="font-size:2.5rem;font-weight:700;margin-bottom:.25rem">$149<span style="font-size:1rem;font-weight:400;color:var(--muted)">/mo</span></div>
+        <div style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">For growing businesses</div>
+        <ul class="pf"><li><span class="ck">&#10003;</span>Unlimited automation flows</li><li><span class="ck">&#10003;</span>All 197+ integrations</li><li><span class="ck">&#10003;</span>Full CRM, unlimited contacts</li><li><span class="ck">&#10003;</span>Claude Sonnet 4 + Gemini 2.0</li><li><span class="ck">&#10003;</span>WhatsApp via wacli</li><li><span class="ck">&#10003;</span>Priority support</li></ul>
+        <a href="/contact/" class="bp" style="width:100%;text-align:center;justify-content:center;display:flex">Get Early Access</a>
+      </div>
+      <div class="gc pc">
+        <div style="font-size:.875rem;font-weight:500;color:var(--muted);margin-bottom:.5rem">Enterprise</div>
+        <div style="font-size:2.5rem;font-weight:700;margin-bottom:.25rem">Custom</div>
+        <div style="font-size:.875rem;color:var(--muted);margin-bottom:1.5rem">For teams &amp; agencies</div>
+        <ul class="pf"><li><span class="ck">&#10003;</span>Everything in Pro</li><li><span class="ck">&#10003;</span>Dedicated Ollama instance</li><li><span class="ck">&#10003;</span>On-prem deployment</li><li><span class="ck">&#10003;</span>Custom integrations</li><li><span class="ck">&#10003;</span>SLA + dedicated support</li></ul>
+        <a href="/contact/" class="bo" style="width:100%;text-align:center;justify-content:center;display:flex">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section style="padding:4rem 0 7rem">
+  <div class="wrap">
+    <div class="cta-box">
+      <div class="lbl" style="margin-bottom:1rem">Ready to automate?</div>
+      <h2 class="h2" style="margin-bottom:1rem">Put your business on autopilot.</h2>
+      <p style="color:var(--muted);margin-bottom:2rem;max-width:36rem;margin-left:auto;margin-right:auto">Arcline is launching soon. Get on the early access list and lock in founding member pricing.</p>
+      <a href="/contact/" class="bp">Get Early Access &rarr;</a>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="fi2">
+    <a href="/" class="logo">Arc<span style="color:#22d3ee">line</span></a>
+    <div class="fl"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/about/">About</a><a href="https://autopilotaitech.com" target="_blank">AutopilotAI Tech</a></div>
+    <div style="font-size:.8125rem;color:var(--dim)">&copy; 2026 Autopilot AI Tech LLC</div>
+  </div>
+</footer>
+</body>
+</html>
